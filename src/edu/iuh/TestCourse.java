@@ -2,30 +2,31 @@
  * @description: Chua lop Test de kiem tra, menu va du lieu mau test
  * @author: Tran Van Trieu
  * @version: 1.0
- * @created: 20:42
+ * @created: 23:21
  *  * Thursday, September 4, 2025
  */
-package edu.iuh.;
+package edu.iuh;
 
 import java.util.Scanner;
 
-public class Test {
+public class TestCourse {
 
-    //Ham tao du lieu mau
-    private static void initData(CoursList list) {
-        list.addCourse(new course("CS101", "Intro to Programming", 3, "Computer Science"));
-        list.addCourse(new course("CS102", "Data Structures", 4, "Computer Science"));
-        list.addCourse(new course("MA101", "Calculus I", 3, "Mathematics"));
-        list.addCourse(new course("MA102", "Linear Algebra", 3, "Mathematics"));
-        list.addCourse(new course("PH101", "Physics I", 4, "Physics"));
-        list.addCourse(new course("CS201", "Algorithms", 4, "Computer Science"));
+
+    //Ham tao data
+    private static void initData(CourseList list) {
+        list.addCourse(new Course("CS101", "Intro to Programming", 3, "Computer Science"));
+        list.addCourse(new Course("CS102", "Data Structures", 4, "Computer Science"));
+        list.addCourse(new Course("MA101", "Calculus I", 3, "Mathematics"));
+        list.addCourse(new Course("MA102", "Linear Algebra", 3, "Mathematics"));
+        list.addCourse(new Course("PH101", "Physics I", 4, "Physics"));
+        list.addCourse(new Course("CS201", "Algorithms", 4, "Computer Science"));
     }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        CoursList list = new CoursList(100);
+        CourseList list = new CourseList(50);
 
-        //Khoi tao du lieu mau
+        //Khoi ta data
         initData(list);
 
         while (true) {
@@ -66,7 +67,7 @@ public class Test {
                         }
                         System.out.print("Enter Department: ");
                         String dept = sc.nextLine();
-                        course c = new course(id, title, credit, dept);
+                        Course c = new Course(id, title, credit, dept);
                         boolean added = list.addCourse(c);
                         System.out.println(added ? "Added successfully." : "Failed to add course.");
                     } catch (Exception e) {
@@ -74,12 +75,12 @@ public class Test {
                     }
                     break;
                 case 2:
-                    course[] all = list.getCourses();
+                    Course[] all = list.getCourses();
                     if (all.length == 0) {
                         System.out.println("No courses available.");
                     } else {
                         System.out.printf("%-10s %-20s %-5s %-15s\n", "ID", "Title", "Cred", "Department");
-                        for (course c : all) {
+                        for (Course c : all) {
                             System.out.println(c);
                         }
                     }
@@ -93,47 +94,47 @@ public class Test {
                 case 4:
                     System.out.print("Enter course ID: ");
                     String sid = sc.nextLine();
-                    course found = list.searchCourseById(sid);
+                    Course found = list.searchCourseById(sid);
                     System.out.println(found != null ? found : "Not found");
                     break;
                 case 5:
                     System.out.print("Enter title keyword: ");
                     String kw = sc.nextLine();
-                    course[] res1 = list.searchCourse(kw);
+                    Course[] res1 = list.searchCourse(kw);
                     if (res1.length > 0) {
-                        for (course c : res1) System.out.println(c);
+                        for (Course c : res1) System.out.println(c);
                     } else {
-                        System.out.println("No courses found");
+                        System.out.println("Not found");
                     }
                     break;
                 case 6:
                     System.out.print("Enter department: ");
                     String dep = sc.nextLine();
-                    course[] res2 = list.searchCourseByDepartment(dep);
+                    Course[] res2 = list.searchCourseByDepartment(dep);
                     if (res2.length > 0) {
-                        for (course c : res2) System.out.println(c);
+                        for (Course c : res2) System.out.println(c);
                     } else {
-                        System.out.println("No courses found");
+                        System.out.println("Not found");
                     }
                     break;
                 case 7:
-                    course[] sorted = list.sortCourses();
-                    for (course c : sorted) System.out.println(c);
+                    Course[] sorted = list.sortCourses();
+                    for (Course c : sorted) System.out.println(c);
                     break;
                 case 8:
-                    course[] maxCourses = list.findMaxCreditCourses();
+                    Course[] maxCourses = list.findMaxCreditCourses();
                     if (maxCourses.length > 0) {
-                        for (course c : maxCourses) System.out.println(c);
+                        for (Course c : maxCourses) System.out.println(c);
                     } else {
-                        System.out.println("No courses found");
+                        System.out.println("Not found");
                     }
                     break;
                 case 9:
                     String dept = list.findDepartmentWithMostCourses();
-                    System.out.println(dept != null ? dept : "No courses");
+                    System.out.println(dept != null ? dept : "Not courses");
                     break;
                 case 0:
-                    System.out.println("Goodbye!");
+                    System.out.println("Bye!");
                     sc.close();
                     return;
             }
